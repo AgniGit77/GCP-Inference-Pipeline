@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "scenes": [
+    {
+      "scene_id": "test_001",
+      "detections": [
+        {
+          "pixel_x": 14886.87,
+          "pixel_y": 7732.57,
+          "longitude": 77.889690,
+          "latitude": 11.475070,
+          "confidence": 0.912
+        }
+      ]
+    }
+  ]
+}
