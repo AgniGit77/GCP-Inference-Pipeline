@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCP VISUALIZER v1.0</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Panel -->
+        <aside class="sidebar glass-panel">
+            <header class="sidebar-header">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <h1>GCP VISUALIZER</h1>
+                </div>
+                <span class="version">V 1.0</span>
+            </header>
+
+            <div class="sidebar-content">
+                <!-- Scenes Section -->
+                <section class="scenes-section">
+                    <div class="section-header">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <h2>SCENES (<span id="scene-count">3</span>)</h2>
+                    </div>
+                    <ul class="scene-list" id="scene-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </section>
+
+                <!-- Detections Stats -->
+                <section class="stats-section glass-panel-inner">
+                    <div class="stat-box">
+                        <span class="stat-label">DETECTIONS</span>
+                        <span class="stat-value" id="stat-total">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">MEAN CONF</span>
+                        <span class="stat-value" id="stat-mean">0.000</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">HIGH CONF</span>
+                        <span class="stat-value text-green" id="stat-high">0.000</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">LOW CONF</span>
+                        <span class="stat-value text-red" id="stat-low">0.000</span>
+                    </div>
+                </section>
+
+                <!-- Detection Log -->
+                <section class="log-section">
+                    <div class="section-header space-between">
+                        <h2>DETECTION LOG</h2>
+                        <span class="sort-label">SORTED BY CONF</span>
+                    </div>
+                    <ul class="detection-list" id="detection-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </section>
+
+                <!-- Selection Inspector -->
+                <section class="inspector-section">
+                    <div class="section-header">
+                        <h2>SELECTION INSPECTOR</h2>
+                    </div>
+                    <div class="inspector-card glass-panel-inner" id="inspector-card">
+                        <div class="inspector-top space-between">
+                            <div class="signal-info">
+                                <span class="stat-label">Signal Confidence</span>
+                                <div class="confidence-badge" id="insp-conf">0.0000</div>
+                            </div>
+                            <div class="id-badge">ID <span id="insp-id">-</span></div>
+                        </div>
+                        <div class="inspector-grid">
+                            <div class="insp-item">
+                                <span class="insp-label"># PIXEL X</span>
+                                <span class="insp-val" id="insp-px">-</span>
+                            </div>
+                            <div class="insp-item">
+                                <span class="insp-label"># PIXEL Y</span>
+                                <span class="insp-val" id="insp-py">-</span>
+                            </div>
+                            <div class="insp-item">
+                                <span class="insp-label">@ LATITUDE</span>
+                                <span class="insp-val" id="insp-lat">-</span>
+                            </div>
+                            <div class="insp-item">
+                                <span class="insp-label">@ LONGITUDE</span>
+                                <span class="insp-val" id="insp-lng">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </aside>
+
+        <!-- Map Container -->
+        <main class="map-container">
+            <div id="map"></div>
+            
+            <!-- Floating Map UI -->
+            <div class="map-overlay top-right glass-panel">
+                <span class="signal-count" id="map-signal-count">0 SIGNALS</span>
+            </div>
+            
+            <div class="map-overlay bottom-left glass-panel">
+                <h3>CONFIDENCE</h3>
+                <ul class="legend-list">
+                    <li><span class="dot dot-green"></span> &ge; 0.75</li>
+                    <li><span class="dot dot-yellow"></span> 0.50 - 0.74</li>
+                    <li><span class="dot dot-red"></span> &lt; 0.50</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- App JS -->
+    <script src="app.js"></script>
+</body>
+</html>
